@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Sharing</title>
+</head>
+<body>
+    <h1>Upload a File</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Uploaded Files</h2>
+    <ul>
+        {% for file in files %}
+        <li>
+            {{ file.name }} - 
+            <a href="{% url 'download_file' file.id %}">Download</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

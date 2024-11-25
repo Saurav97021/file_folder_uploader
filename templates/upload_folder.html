@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Folder Sharing</title>
+</head>
+<body>
+    <h1>Upload a Folder (as ZIP)</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="folder">Select a Folder:</label>
+        <input type="file" id="folder" name="folder[]" webkitdirectory multiple>
+        <button type="submit">Upload Folder</button>
+    </form>
+    
+
+    <h2>Uploaded Folders</h2>
+    <ul>
+        {% for folder in folders %}
+        <li>
+            {{ folder.name }} - 
+            <a href="{% url 'download_folder' folder.id %}">Download</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
